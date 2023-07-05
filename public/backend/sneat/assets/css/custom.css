@@ -1,0 +1,25 @@
+.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
+    background-color: rgba(105,108,255,.16) !important;
+    color: #696cff !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px 0 rgb(105 108 255 / 40%) !important;
+}
+
+/*.dataTables_filter label:first-child {
+    display: none;
+}*/
+
+/*.custom_length select {
+    height: 37px !important;
+    margin: 0px 10px;
+}
+
+.recipe_users_lbl span.select2 {
+    float: inherit !important;
+    margin-top: 0 !important;
+    margin-right: 0px !important;
+}*/
+
+.sub-categories-table tbody tr td span.badge {
+    text-transform: none !important;
+}

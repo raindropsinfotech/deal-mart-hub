@@ -1,0 +1,83 @@
+Dcoumentation
+
+Roles : 
+1. Super admin
+2. Admin
+3. Staff
+4. Merchanents
+5. Cutomers
+
+1. Super admin
+    --- Table name : Role Management : DOne ---
+    --- Table name : User management : On going ---
+        - id
+        - name
+    --- Table name : Categories --- Cnaceled
+        - id
+        - name
+        - parent    
+
+    --- Table name : MainCategory ---
+        id  =                           
+        name = Health / Beauty / Wellness, Activities & Leisure, Retail - In store, Home & Auto Services, Food & Drink, Other Services
+        slug
+
+    --- Table name :  Categories ---
+        id
+        maincat_id  =
+        name
+        slug
+
+    --- Table name :  maincate/castegory ---
+        other/category
+
+    --- Table name : deals ---
+        id =
+        merchent_id = 
+        main_categories = 
+        sub_categories = 
+        template_id(Nullable) = 
+        options = (Json) {
+            [
+                option1: [
+                    opt_name
+                    reg_price
+                    monthly_voucher_caps
+                    discount
+                ],
+                option1: [
+                    opt_name
+                    reg_price
+                    monthly_voucher_caps
+                    discount
+                ]
+            ]
+        }
+        proof_pricing = 1=Business ,2 = receipts/invoices ,3 = my menu or service list
+        photos = [125,456,759]
+
+    --- Table name : proof_pricing ---
+        deal_id =
+        bussiness_url(Nullable) = #
+        receipts_invoices_imgs(Nullable) = ["bjbg.jpg","hjgh.pdf","njk.png"]
+        menu_or_service_list(Nullable) = ["bjbg.jpg","hjgh.pdf","njk.png"]
+
+
+    --- Table name : medias ---
+        id
+        user_id
+        img
+
+
+
+
+
+= Question : How can we manage categories for Frontend and Backend.
+
+abc/dsfdf
+
+
+
+
+
+

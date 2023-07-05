@@ -1,0 +1,23 @@
+--- Offical GroupOn Site ----
+
+Merchent Login:
+skyrahfoodsandbeverages@gmail.com
+Skyrahfoods1234
+
+Staff login:
+jspatel7747@gmail.com
+Skyrahfoods1234
+
+Customer login
+patel7747@gmail.com
+Skyrahfoods1234
+
+============================================ Tools and 3rd Party Packages ==========================================
+3rd Party packages :
+
+1) https://github.com/cviebrock/eloquent-sluggable
+    - for creating dynamic slugs.
+
+
+========================================= Examples =================================================================
+- https://www.itsolutionstuff.com/post/laravel-5-category-treeview-hierarchical-structure-example-with-demoexample.html
