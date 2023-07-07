@@ -33,9 +33,9 @@ class LoginController extends Controller
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
     public function authenticated(Request $request, $user)  {
-        if( $user->hasrole('super-admin') ){
+        if( $user->hasrole('super-admin') || $user->hasrole('admin')){
             return redirect()->route('super_admin_dashboard');
-        }else{
+        } else {
             return redirect()->route('home');
         }
     }

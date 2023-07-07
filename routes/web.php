@@ -29,7 +29,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Backend Routes
-Route::group(['namespace' => 'Backend','prefix' => 'administrator', 'middleware' => ['auth', 'role:super-admin']], function() {
+
+// Super Admin Routes
+Route::group(['namespace' => 'Backend','prefix' => 'administrator', 'middleware' => ['auth', 'role:super-admin|admin']], function() {
     // Dashboard routes
     Route::get('/', function () {
         return redirect()->route('super_admin_dashboard');
@@ -49,7 +51,23 @@ Route::group(['namespace' => 'Backend','prefix' => 'administrator', 'middleware'
     Route::get('users-management', [UserController::class,'index'])->name('backend_all_users');
     Route::get('create-user', [UserController::class,'create'])->name('backend_create_user');
     Route::post('create-user', [UserController::class,'store'])->name('backend_store_user');
-    Route::get('edit-user/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user');
+    Route::post('delete-user/{delete_id}', [UserController::class,'destroy'])->name('backend_destroy_user');
+    // Route::get('edit-user/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user');
+    Route::group(['namespace' => 'Backend','prefix' => 'edit-user'], function(){
+        Route::get('account/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_account');
+        Route::post('update-account/{update_id}', [UserController::class,'update'])->name('backend_update_user_account');
+
+        Route::get('security/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_security');
+        Route::post('update-security/{update_id}', [UserController::class,'update'])->name('backend_update_user_security');
+
+        Route::get('billings-plans/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_billings_plans');
+
+        Route::get('preferences/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_preferances');
+        Route::post('update-preference/{update_id}', [UserController::class,'update'])->name('backend_update_user_preferences');
+
+        Route::get('suspend/{suspend_id}', [UserController::class,'userSuspendRise'])->name('backend_suspend_user');
+        Route::get('rise/{rise_id}', [UserController::class,'userSuspendRise'])->name('backend_rise_user');
+    });
 
     // Main category management
     Route::get('main-categories', [MainCategoryController::class,'index'])->name('backend_all_main_categories');
@@ -70,6 +88,30 @@ Route::group(['namespace' => 'Backend','prefix' => 'administrator', 'middleware'
     Route::post('delete-sub-category/{delete_id}', [SubCategoryController::class,'destroy'])->name('backend_delete_sub_category');
 });
 
-Route::group(['namespace' => 'Backend','prefix' => 'merchant', 'middleware' => ['auth', 'role:merchant']], function() {
+// Admin Route
+// Route::group(['namespace' => 'Backend','prefix' => 'dmh-admin', 'middleware' => ['auth', 'role:admin']], function() {
+//     Route::get('/', function () {
+//         return redirect()->route('dmh_admin_dashboard');
+//     });
 
-});
+//     Route::get('dashboard', [DashboardController::class,'index'])->name('dmh_admin_dashboard');
+
+//     // User management routes
+//     Route::get('users-management', [UserController::class,'index'])->name('backend_all_users');
+//     Route::get('create-user', [UserController::class,'create'])->name('backend_create_user');
+//     Route::post('create-user', [UserController::class,'store'])->name('backend_store_user');
+//     // Route::get('edit-user/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user');
+//     Route::group(['namespace' => 'Backend','prefix' => 'edit-user'], function(){
+//         Route::get('account/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_account');
+//         Route::post('update-account/{update_id}', [UserController::class,'update'])->name('backend_update_user_account');
+
+//         Route::get('security/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_security');
+//         Route::post('update-security/{update_id}', [UserController::class,'update'])->name('backend_update_user_security');
+
+//         Route::get('billings-plans/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_billings_plans');
+//         Route::get('preferences/{edit_id}', [UserController::class,'edit'])->name('backend_edit_user_preferances');
+
+//         Route::get('suspend/{suspend_id}', [UserController::class,'userSuspendRise'])->name('backend_suspend_user');
+//         Route::get('rise/{rise_id}', [UserController::class,'userSuspendRise'])->name('backend_rise_user');
+//     });
+// });

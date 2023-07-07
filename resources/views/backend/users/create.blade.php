@@ -94,7 +94,7 @@
 <script>
 
     $(document).ready(function () {
-
+        window.Helpers.initPasswordToggle()
         $('#profile_img').change(function(){
             console.log(this.files);
             let reader = new FileReader();

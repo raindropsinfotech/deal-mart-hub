@@ -30,16 +30,6 @@
         <div class="card">
             <div class="card-datatable table-responsive">
                 <div class="card-header flex-column flex-md-row border-bottom">
-                    {{-- <div class="dt-action-buttons text-end pt-3 pt-md-0">
-                        <div class="dt-buttons btn-group flex-wrap">
-                            <a href="{{ route('backend_create_user') }}" class="btn btn-secondary create-new btn-label-primary">
-                                <span>
-                                    <i class="bx bx-user-plus me-md-2"></i>
-                                    <span class="d-none d-sm-inline-block">Add User</span>
-                                </span>
-                            </a>
-                        </div>
-                    </div> --}}
                     <div class="d-flex justify-content-start align-items-center row py-3 gap-3 gap-md-0">
                         <div class="col-md-3 user_role">
                             <select name="roles" id="roles" class="form-select text-capitalize">
@@ -55,14 +45,6 @@
                                 <option value="Active"> Active </option>
                                 <option value="Inactive"> Inactive </option>
                             </select>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="{{ route('backend_create_user') }}" class="btn btn-secondary create-new btn-label-primary">
-                                <span>
-                                    <i class="bx bx-user-plus me-md-2"></i>
-                                    <span class="d-none d-sm-inline-block">Add User</span>
-                                </span>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -91,27 +73,43 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <a href="" class="text-body text-truncate">
-                                            <span class="fw-semibold">{{ $user->name }}</span>
+                                            <span class="fw-semibold">
+                                                {{ $user->name }}
+                                                @if( auth()->id() == $user->id )<span class="badge bg-label-danger">You</span>@endif
+                                            </span>
                                         </a>
                                         <small class="text-muted">{{ $user->email }}</small>
                                     </div>
                                 </div>
                             </td>
-
                             <td>
                                 @if($user->roles)
                                     @foreach( $user->roles as $rkey => $role )
-                                        @if( $role->name == 'merchent')
+                                        @if( $role->id == 5)
+                                            <span class="text-truncate d-flex align-items-center text-capitalize">
+                                                <span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2">
+                                                    <i class="bx bx-cog bx-xs"></i>
+                                                </span>
+                                                {{ $role->name }}
+                                            </span>
+                                        @elseif( $role->id == 3)
                                             <span class="text-truncate d-flex align-items-center text-capitalize">
                                                 <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
                                                     <i class="bx bx-pie-chart-alt bx-xs"></i>
                                                 </span>
                                                 {{ $role->name }}
                                             </span>
-                                        @elseif( $role->name == 'customer1' || $role->name == 'customer')
+                                        @elseif( $role->id == 4 )
                                             <span class="text-truncate d-flex align-items-center text-capitalize">
                                                 <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2">
                                                     <i class="bx bx-user bx-xs"></i>
+                                                </span>
+                                                {{ $role->name }}
+                                            </span>
+                                        @elseif( $role->id == 6)
+                                            <span class="text-truncate d-flex align-items-center text-capitalize">
+                                                <span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2">
+                                                    <i class="bx bx-edit bx-xs"></i>
                                                 </span>
                                                 {{ $role->name }}
                                             </span>
@@ -127,9 +125,9 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <form action="" method="POST" id="confirm_delete">
+                                <form action="{{ route('backend_destroy_user', ['delete_id' => $user->id]) }}" method="POST" id="confirm_delete">
                                     @csrf
-                                    <a href="{{ route('backend_edit_user',['edit_id' => $user->id]) }}" class="btn btn-icon btn-outline-primary"  data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="left" data-bs-custom-class="tooltip-primary" data-bs-html="true" data-bs-original-title="Edit">
+                                    <a href="{{ route('backend_edit_user_account',['edit_id' => $user->id]) }}" class="btn btn-icon btn-outline-primary"  data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="left" data-bs-custom-class="tooltip-primary" data-bs-html="true" data-bs-original-title="Edit">
                                         <span class="tf-icons bx bx-edit-alt"></span>
                                     </a>
 
@@ -179,13 +177,66 @@
         "autoWidth": false,
         "responsive": true,
         "language" : {
-            'emptyTable' : "No Users records",
+            'emptyTable' : "No Users found",
             'paginate' : {
                 'previous' : "Previous",
                 'next' : "Next",
             }
         },
+        dom:
+            '<"row mx-2"<"col-md-2"<"me-3"l>><"col-md-10"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0"fB>>>t<"row mx-2"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        buttons: [
+            {
+                text: '<i class="bx bx-user-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add User</span>',
+                className: "btn btn-secondary btn-label-primary me-0 mx-3",
+                action: function () {
+                  window.location.href = "{{ route('backend_create_user') }}";
+                },
+                attr: { "href" : "{{ route('backend_create_user') }}" },
+            },
+        ],
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal({
+                    header: function (e) {
+                        return "Details of " + e.data().full_name;
+                    },
+                }),
+                type: "column",
+                renderer: function (e, t, a) {
+                    a = $.map(a, function (e, t) {
+                        return "" !== e.title ? '<tr data-dt-row="' + e.rowIndex + '" data-dt-column="' + e.columnIndex + '"><td>' + e.title + ":</td> <td>" + e.data + "</td></tr>" : "";
+                    }).join("");
+                    return !!a && $('<table class="table"/><tbody />').append(a);
+                },
+            },
+        },
     });
+    // Remove class from DT Default search and page shorting boxes
+    setTimeout(() => {
+        $(".dataTables_filter .form-control").removeClass("form-control-sm"), $(".dataTables_length .form-select").removeClass("form-select-sm");
+    }, 100);
+
+    // Filter for User Role
+    $( document ).on('change', '#roles', function(){
+        var role = $(this).val();
+        if( role ) {
+            $('.users-table').DataTable().column(2).search('\\b' + $.fn.dataTable.util.escapeRegex(role) + '\\b', true, false).draw();
+        } else {
+            $('.users-table').DataTable().column(2).search('').draw();
+        }
+    });
+
+    // Filter for User Status
+    $( document ).on('change', '#status', function(){
+        var status = $(this).val();
+        if( status ) {
+            $('.users-table').DataTable().column(3).search('\\b' + $.fn.dataTable.util.escapeRegex(status) + '\\b', true, false).draw();
+        } else {
+            $('.users-table').DataTable().column(3).search('').draw();
+        }
+    });
+
     $(document).on('click','.show-alert-delete-box',function(event){
         var form =  $(this).closest("form");
         var name = $(this).data("name");

@@ -25,7 +25,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('backend/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('deal_mart_hub.ico') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -45,7 +45,6 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('backend/sneat/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/sneat/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
-    <link rel="stylesheet" href="{{ asset('backend/sneat/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('backend/sneat/assets/css/custom.css') }}" />
@@ -89,7 +88,7 @@
   <div class="app-brand demo ">
     <a href="{{ route('super_admin_dashboard') }}" class="app-brand-link">
       <span class="app-brand-logo demo">
-        <img class="sidebar_logo" src="{{ asset('backend/CuisineQuest 1_layerstyle.svg') }}" width="200">
+        <img class="sidebar_logo" src="{{ asset('deal-mart-hub-logo.svg') }}" width="150">
       </span>
       <span class="app-brand-text demo menu-text fw-bolder ms-2"></span>
     </a>
@@ -200,7 +199,6 @@
   <script src="{{ asset('backend/sneat/assets/js/main.js') }}"></script>
 
   <!-- Page JS -->
-  <script src="{{ asset('backend/sneat/assets/js/dashboards-analytics.js') }}"></script>
   @yield('js')
 </body>
 

@@ -25,6 +25,12 @@
                     <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="col-md-6">
+                <div class="alert alert-warning" role="alert">
+                    <h6 class="alert-heading fw-bold mb-2">Warning</h6>
+                    <p class="mb-0">By editing the role name, you might break the system role functionality. Please ensure you're absolutely certain before proceeding.</p>
+                </div>
+            </div>
         </div>
         <div class="pt-4">
             <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>

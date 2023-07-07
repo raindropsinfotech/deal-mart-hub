@@ -7,6 +7,7 @@
         </a>
     </li>
 
+    @role('super-admin')
     <!-- Role Management -->
     <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Role Management</span>
@@ -17,6 +18,7 @@
             <div data-i18n="Roles Management">Roles Management</div>
         </a>
     </li>
+    @endrole
 
     <!-- User Management -->
     <li class="menu-header small text-uppercase">
@@ -28,6 +30,9 @@
             <div data-i18n="User Management">User Management</div>
         </a>
     </li>
+
+    @role('super-admin')
+    <!-- Categories Management -->
     <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Category Management</span>
     </li>
@@ -43,7 +48,16 @@
             <div data-i18n="Sub Categories">Sub Categories</div>
         </a>
     </li>
+    @endrole
+
+     <!-- Categories Management -->
     <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Preferances</span>
+        <span class="menu-header-text">MISC</span>
+    </li>
+    <li class="menu-item {{ request()->segment(2) == 'main-categories' || request()->segment(2) == 'create-main-category' || request()->segment(2) == 'edit-main-category' ? 'active' : '' }}">
+        <a href="{{ route('backend_all_main_categories') }}" class="menu-link">
+            <i class="menu-icon fas fa-list-alt"></i>
+            <div data-i18n="Fine Prints">Fine Prints</div>
+        </a>
     </li>
 </ul>

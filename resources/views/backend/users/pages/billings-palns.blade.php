@@ -54,27 +54,14 @@
                     <span class="fw-bold me-2">Role:</span>
                     <span class="text-truncate text-capitalize">{{$editUser->roles[0]->name}}</span>
                 </li>
-                {{-- <li class="mb-3">
-                    <span class="fw-bold me-2">Tax id:</span>
-                    <span>Tax-8965</span>
-                </li>
-                <li class="mb-3">
-                    <span class="fw-bold me-2">Contact:</span>
-                    <span>(123) 456-7890</span>
-                </li>
-                <li class="mb-3">
-                    <span class="fw-bold me-2">Languages:</span>
-                    <span>French</span>
-                </li>
-                <li class="mb-3">
-                    <span class="fw-bold me-2">Country:</span>
-                    <span>England</span>
-                </li> --}}
             </ul>
-            {{-- <div class="d-flex justify-content-center pt-3">
-                <a href="javascript:;" class="btn btn-primary me-3" data-bs-target="#editUser" data-bs-toggle="modal">Edit</a>
-                <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspended</a>
-            </div> --}}
+            <div class="d-flex justify-content-center pt-3">
+                @if($editUser->trashed())
+                    <a href="{{ route('backend_rise_user', ['rise_id' => $editUser->id]) }}" class="btn btn-label-info">Rise</a>
+                @else
+                    <a href="{{ route('backend_suspend_user', ['suspend_id' => $editUser->id]) }}" class="btn btn-label-danger suspend-user">Suspend</a>
+                @endif
+            </div>
         </div>
       </div>
     </div>
@@ -84,7 +71,17 @@
 
     <!-- User Content -->
     <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+        <ul class="nav nav-pills flex-column flex-md-row mb-3">
+            <li class="nav-item"><a class="nav-link" href="{{ route('backend_edit_user_account',['edit_id' => $editUser->id]) }}"><i class="bx bx-user me-1"></i>Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('backend_edit_user_security',['edit_id' => $editUser->id]) }}"><i class="bx bx-lock-alt me-1"></i>Security</a></li>
+            <li class="nav-item active"><a class="nav-link active" href="{{ route('backend_edit_user_billings_plans',['edit_id' => $editUser->id]) }}"><i class="bx bx-detail me-1"></i>Billing & Plans</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('backend_edit_user_preferances',['edit_id' => $editUser->id]) }}"><i class="fas fa-sliders me-1"></i>Preferences</a></li>
+        </ul>
 
+        <!-- Billings N Plans Details -->
+        <div class="card mb-4">
+            <h5 class="card-header">Billings N Plans</h5>
+        </div>
     </div>
     <!--/ User Pills -->
 </div>

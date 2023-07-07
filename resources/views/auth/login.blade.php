@@ -50,7 +50,7 @@
 
     <!-- Page CSS -->
     <!-- Page -->
-<link rel="stylesheet" href="{{ asset('backend/sneat/assets/vendor/css/pages/page-auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/sneat/assets/vendor/css/pages/page-auth.css') }}">
     <!-- Helpers -->
     <script src="{{ asset('backend/sneat/assets/vendor/js/helpers.js') }}"></script>
 
